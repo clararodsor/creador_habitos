@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Estadísticas</title>
     <link rel="stylesheet" href="/creador_habitos/public/css/estilos.css">
+    <link rel="stylesheet" href="/creador_habitos/public/css/bootstrap.min.css">
 </head>
 
 <body>

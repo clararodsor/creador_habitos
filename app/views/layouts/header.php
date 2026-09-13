@@ -5,7 +5,9 @@
         <ul>
             <li><a href="/creador_habitos/public/index.php?accion=hoy">Hoy</a></li>
             <li><a href="/creador_habitos/public/index.php?accion=estadisticas">Estadísticas</a></li>
-            <li><a href="/creador_habitos/public/index.php?accion=crearTarea">Crear Tarea</a></li>
+            <li><a href="/creador_habitos/public/index.php?accion=crearTarea">Crear tarea</a></li>
+            <li><a href="/creador_habitos/public/index.php?accion=logout">Cerrar sesión</a></li>
+            <li><a href="/creador_habitos/public/index.php?accion=cambiarContrasenna">Cambiar contraseña</a></li>
         </ul>
     </nav>
 </header>
@@ -25,5 +27,3 @@
         </button>
     </div>
 </div>
-
-<script src="/creador_habitos/public/js/script.js"></script>

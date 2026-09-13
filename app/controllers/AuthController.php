@@ -1,4 +1,8 @@
 <?php
+/**
+ * Controlador que gestiona el registro de usuarios,
+ * el inicio y cierre de sesión y el cambio de contraseña.
+ */
 
 require_once __DIR__ . "/../models/Usuario.php";
 
@@ -10,6 +14,10 @@ class AuthController
     {
         $this->usuarioModel = new Usuario($conn);
     }
+
+    /**
+     * Crea un usuario.
+     */
 
     public function crearCuenta()
     {
@@ -23,16 +31,13 @@ class AuthController
 
             if (empty($nombre) || empty($contrasenna) || empty($confirmarContrasenna)) {
                 $error = "Rellena todos los campos";
-            } elseif ($this->usuarioModel->buscarPorNombre($nombre)) {
+            } elseif ($this->usuarioModel->buscarUsuarioPorNombre($nombre)) {
                 $error = "El usuario ya existe";
             } elseif ($contrasenna !== $confirmarContrasenna) {
                 $error = "Las contraseñas no coinciden";
 
             } else {
-                $idUsuario = $this->usuarioModel->crear(
-                    $nombre,
-                    $contrasenna
-                );
+                $idUsuario = $this->usuarioModel->crearUsuario($nombre, $contrasenna);
 
                 if ($idUsuario !== false) {
 
@@ -51,6 +56,10 @@ class AuthController
         require __DIR__ . "/../views/auth/crear_cuenta.php";
     }
 
+    /**
+     * Inicia la sesión.
+     */
+
     public function login()
     {
         $error = null;
@@ -58,7 +67,7 @@ class AuthController
             $nombre = trim($_POST["nombre"] ?? "");
             $contrasenna = $_POST["contrasenna"] ?? "";
             if (!empty($nombre) && !empty($contrasenna)) {
-                $usuario = $this->usuarioModel->buscarPorNombre($nombre);
+                $usuario = $this->usuarioModel->buscarUsuarioPorNombre($nombre);
                 if ($usuario) {
                     if (password_verify($contrasenna, $usuario["contrasenna"])) {
                         $_SESSION["idUsuario"] = $usuario["idUsuario"];
@@ -78,14 +87,19 @@ class AuthController
         require __DIR__ . "/../views/auth/login.php";
     }
 
+    /**
+     * Cierra la sesión.
+     */
     public function logout()
     {
         session_destroy();
-
         header("Location: /creador_habitos/public/index.php?accion=login");
         exit;
     }
 
+    /**
+     * Cambia la contraseña
+     */
     public function cambiarContrasenna()
     {
         $error = null;

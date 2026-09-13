@@ -1,0 +1,26 @@
+#diasSemana,
+#diasMes {
+  display: none;
+}
+
+#diasMes {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+#diasMes p {
+  grid-column: 1/-2;
+}
+
+.menu-navegacion {
+  border: 1px solid #ccc;
+  border-width: 1px 0;
+}
+
+.menu-navegacion ul {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
